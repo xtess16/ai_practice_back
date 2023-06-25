@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from django.views.generic import RedirectView
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtail_admin_urls
 from wagtail.documents import urls as wagtail_documents_urls
@@ -31,6 +32,7 @@ urlpatterns = [
     path('documents/', include(wagtail_documents_urls)),
     path('pages/', include(wagtail_urls)),
     path('images/', include(wagtail_images_urls)),
+    re_path('^$', RedirectView.as_view(url='/cms/')),
     path(r'', include(wagtail_urls))
 ]
 
